@@ -1,0 +1,396 @@
+:root {
+    --pastel-blue: #a8d5f7;
+    --light-blue: #e3f2fd;
+    --soft-pink: #ffc0cb;
+    --white: #ffffff;
+    --text-dark: #333333;
+    --text-light: #666666;
+    --shadow: rgba(0, 0, 0, 0.1);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    width: 100%;
+    min-height: 100%;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: var(--text-dark);
+}
+
+/* Fixed background layer - consistent across all pages */
+#background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--light-blue) 0%, #ffffff 100%);
+    z-index: 0;
+    pointer-events: none;
+}
+
+#hearts-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+/* Floating hearts */
+.heart {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    opacity: 0.3;
+    animation: float 15s infinite ease-in-out;
+    pointer-events: none;
+}
+
+@keyframes float {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    25% { transform: translateY(-30px) rotate(5deg); }
+    50% { transform: translateY(-15px) rotate(-5deg); }
+    75% { transform: translateY(-40px) rotate(3deg); }
+}
+
+/* Page container - allows natural scrolling */
+.page-container {
+    position: relative;
+    z-index: 1;
+    min-height: 100vh;
+    width: 100%;
+}
+
+/* Centered content (for pages that don't need scroll) */
+.content-center {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+}
+
+/* Scrollable content wrapper (for pages with overflow content) */
+.page-container.scrollable {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.content-wrapper {
+    width: 100%;
+    max-width: 1200px;
+    padding: 60px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Typography */
+h1 {
+    font-size: 3rem;
+    color: var(--pastel-blue);
+    margin-bottom: 30px;
+    text-align: center;
+    text-shadow: 2px 2px 4px var(--shadow);
+}
+
+h2 {
+    font-size: 2rem;
+    color: var(--pastel-blue);
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.subtitle {
+    font-size: 1.2rem;
+    color: var(--text-light);
+    margin: 15px 0;
+    text-align: center;
+}
+
+/* Avatar */
+.avatar-container {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: white;
+    padding: 10px;
+    box-shadow: 0 8px 24px var(--shadow);
+    margin: 20px 0;
+    overflow: hidden;
+}
+
+.avatar {
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+/* Buttons */
+.btn {
+    background: linear-gradient(135deg, #64b5f6 0%, #42a5f5 100%);
+    color: white;
+    border: none;
+    padding: 14px 40px;
+    font-size: 1.1rem;
+    border-radius: 50px;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(66, 165, 245, 0.4);
+    transition: all 0.3s ease;
+    margin-top: 30px;
+    font-weight: 600;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(66, 165, 245, 0.5);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.btn-secondary {
+    background: linear-gradient(135deg, #e0e0e0 0%, #bdbdbd 100%);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    margin-left: 15px;
+}
+
+.button-group {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+/* Memory gallery - now fully scrollable */
+.memory-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1000px;
+    width: 100%;
+    margin: 30px 0;
+}
+
+.polaroid {
+    background: white;
+    padding: 15px;
+    padding-bottom: 40px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px var(--shadow);
+    transition: transform 0.3s ease;
+}
+
+.polaroid:nth-child(odd) {
+    transform: rotate(-2deg);
+}
+
+.polaroid:nth-child(even) {
+    transform: rotate(2deg);
+}
+
+.polaroid:hover {
+    transform: rotate(0deg) scale(1.05);
+    z-index: 10;
+}
+
+.polaroid-img {
+    width: 100%;
+    height: 220px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    margin-bottom: 10px;
+}
+
+/* Music section */
+.video-container {
+    background: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px var(--shadow);
+    max-width: 600px;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.video-embed {
+    width: 100%;
+    height: 315px;
+    border-radius: 12px;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+}
+
+.song-info {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.song-title {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--text-dark);
+    margin-bottom: 5px;
+}
+
+.song-artist {
+    font-size: 1rem;
+    color: var(--text-light);
+}
+
+.quote {
+    font-style: italic;
+    color: var(--text-light);
+    margin-top: 20px;
+    max-width: 500px;
+    line-height: 1.6;
+    text-align: center;
+}
+
+/* Letter sections */
+.icon-circle {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 8px 24px var(--shadow);
+    margin: 20px 0;
+    font-size: 4rem;
+}
+
+.cat-img {
+    width: 300px;
+    height: 300px;
+    border-radius: 20px;
+    background: linear-gradient(135deg, #fff9e6 0%, #ffe0b2 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 8rem;
+    box-shadow: 0 8px 24px var(--shadow);
+    margin: 20px 0;
+}
+
+.letter-card {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 8px 24px var(--shadow);
+    max-width: 700px;
+    width: 100%;
+    margin: 20px 0;
+}
+
+.letter-card h2 {
+    margin-bottom: 30px;
+}
+
+.letter-text {
+    line-height: 1.8;
+    color: var(--text-dark);
+    font-size: 1.1rem;
+    text-align: left;
+}
+
+.letter-text p {
+    margin-bottom: 20px;
+}
+
+/* Final screen */
+.final-date {
+    font-size: 2.5rem;
+    font-weight: 700;
+    color: var(--text-dark);
+    margin: 20px 0;
+}
+
+.final-emojis {
+    font-size: 4rem;
+    margin: 20px 0;
+}
+
+/* Shake animation */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.shake {
+    animation: shake 0.3s ease;
+}
+
+/* Responsive design */
+@media (max-width: 768px) {
+    h1 { 
+        font-size: 2rem; 
+    }
+    
+    h2 { 
+        font-size: 1.5rem; 
+    }
+    
+    .memory-grid { 
+        grid-template-columns: 1fr;
+        gap: 20px;
+        padding: 0 10px;
+    }
+    
+    .polaroid-img {
+        height: 180px;
+    }
+    
+    .letter-card { 
+        padding: 25px;
+        margin: 20px 10px;
+    }
+    
+    .cat-img { 
+        width: 250px; 
+        height: 250px; 
+        font-size: 6rem; 
+    }
+    
+    .btn {
+        padding: 12px 30px;
+        font-size: 1rem;
+    }
+    
+    .video-container {
+        margin: 20px 10px;
+    }
+    
+    .video-embed {
+        height: 240px;
+    }
+    
+    .content-center,
+    .content-wrapper {
+        padding: 30px 15px;
+    }
+}
